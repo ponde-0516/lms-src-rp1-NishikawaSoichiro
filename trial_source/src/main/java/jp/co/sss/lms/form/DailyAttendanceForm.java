@@ -46,5 +46,15 @@ public class DailyAttendanceForm {
 	private String courseName;
 	/** インデックス */
 	private String index;
-
+	
+	//西川颯一郎-Task26
+	//**出勤時間(時間)**//
+	private Integer trainingStartTimeHour;
+	//**出勤時間(分)**//
+	private Integer trainingStartTimeMinutes;
+	//**退勤時間(時間)**//
+	private Integer trainingEndTimeHour;
+	//**出勤時間(分)**//
+	private Integer trainingEndTimeMinutes;
+	
 }

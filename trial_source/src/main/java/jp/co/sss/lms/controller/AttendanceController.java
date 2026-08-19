@@ -109,6 +109,7 @@ public class AttendanceController {
 	/**
 	 * 勤怠管理画面 『勤怠情報を直接編集する』リンク押下
 	 * 
+	 * @author 西川颯一郎-Task26
 	 * @param model
 	 * @return 勤怠情報直接変更画面
 	 */

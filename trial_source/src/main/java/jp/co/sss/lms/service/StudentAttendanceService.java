@@ -206,6 +206,7 @@ public class StudentAttendanceService {
 
 	/**
 	 * 勤怠フォームへ設定
+	 * 
 	 *@author 西川颯一郎-Task.26
 	 * @param attendanceManagementDtoList
 	 * @return 勤怠編集フォーム
@@ -219,6 +220,10 @@ public class StudentAttendanceService {
 		attendanceForm.setUserName(loginUserDto.getUserName());
 		attendanceForm.setLeaveFlg(loginUserDto.getLeaveFlg());
 		attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
+		
+		//Task26にて追加
+		attendanceForm.setHourTimes(attendanceUtil.getHourMap());
+		attendanceForm.setMinutesTimes(attendanceUtil.getMinuteMap());
 
 		// 途中退校している場合のみ設定
 		if (loginUserDto.getLeaveDate() != null) {
@@ -238,6 +243,17 @@ public class StudentAttendanceService {
 			dailyAttendanceForm
 					.setTrainingStartTime(attendanceManagementDto.getTrainingStartTime());
 			dailyAttendanceForm.setTrainingEndTime(attendanceManagementDto.getTrainingEndTime());
+			
+			//Task26にて追加
+			dailyAttendanceForm
+					.setTrainingStartTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTimeHour()));
+			dailyAttendanceForm
+					.setTrainingStartTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTimeMinutes()));
+			dailyAttendanceForm
+					.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTimeHour()));
+			dailyAttendanceForm
+					.setTrainingEndTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTimeMinutes()));
+			
 			if (attendanceManagementDto.getBlankTime() != null) {
 				dailyAttendanceForm.setBlankTime(attendanceManagementDto.getBlankTime());
 				dailyAttendanceForm.setBlankTimeValue(String.valueOf(

@@ -104,6 +104,7 @@ public class AttendanceUtil {
 
 	/**
 	 * 休憩時間取得
+	 * (中抜け時間のプルダウンマップを生成)-Task26
 	 * 
 	 * @return 休憩時間
 	 */
@@ -130,6 +131,60 @@ public class AttendanceUtil {
 
 		}
 		return map;
+	}
+
+	/**
+	 * 時間のプルダウンマップを生成
+	 * 
+	 * @author 西川颯一郎-Task26
+	 * @return 1時間刻みの時間(数値)マップ
+	 */
+	public LinkedHashMap<Integer, String> getHourMap() {
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		map.put(null, "");
+		for (int i = 0; i < 24; i++) {
+			map.put(i, String.format("%02d", i));
+		}
+		return map;
+	}
+
+	/**
+	 * 分のプルダウンマップを生成
+	 * 
+	 * @author 西川颯一郎-Task26
+	 * @return 1分刻みの分(数値)マップ
+	 */
+	public LinkedHashMap<Integer, String> getMinuteMap() {
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		map.put(null, "");
+		for (int i = 0; i < 60; i++) {
+			map.put(i, String.format("%02d", i));
+		}
+		return map;
+	}
+	
+	/**
+	 * 時間(時)の切り出し
+	 * 
+	 * @author 西川颯一郎-Task26
+	 * @param timeString
+	 * @return 出退勤時間(時間)
+	 */
+	public Integer getHour(String timeString) {
+		Integer hour = Integer.parseInt(timeString.substring(0, 2));
+		return hour;
+	}
+	
+	/**
+	 * 時間(分)の切り出し
+	 * 
+	 * @author 西川颯一郎-Task26
+	 * @param timeString
+	 * @return 出退勤時間(分)
+	 */
+	public Integer getMinute(String timeString) {
+		Integer minutes = Integer.parseInt(timeString.substring(3, 5));
+		return minutes;
 	}
 
 	/**
