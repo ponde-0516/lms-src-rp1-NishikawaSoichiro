@@ -245,14 +245,15 @@ public class StudentAttendanceService {
 			dailyAttendanceForm.setTrainingEndTime(attendanceManagementDto.getTrainingEndTime());
 			
 			//Task26にて追加
-			dailyAttendanceForm
-					.setTrainingStartTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTimeHour()));
-			dailyAttendanceForm
-					.setTrainingStartTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTimeMinutes()));
-			dailyAttendanceForm
-					.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTimeHour()));
-			dailyAttendanceForm
-					.setTrainingEndTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTimeMinutes()));
+				dailyAttendanceForm
+						.setTrainingStartTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
+				dailyAttendanceForm
+						.setTrainingStartTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTime()));
+			
+				dailyAttendanceForm
+						.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTime()));
+				dailyAttendanceForm
+						.setTrainingEndTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTime()));
 			
 			if (attendanceManagementDto.getBlankTime() != null) {
 				dailyAttendanceForm.setBlankTime(attendanceManagementDto.getBlankTime());
@@ -360,5 +361,24 @@ public class StudentAttendanceService {
 			return false;
 		}
 	}
-
+	
+	public void formatConversion(AttendanceForm attendanceForm) {
+		for (DailyAttendanceForm dailyAttendanceForm : attendanceForm.getAttendanceList()) {
+			if (dailyAttendanceForm.getTrainingStartTimeHour() != null
+					&& dailyAttendanceForm.getTrainingStartTimeMinutes() != null) {
+				dailyAttendanceForm
+					.setTrainingStartTime(String.format("%02d:%02d", 
+								dailyAttendanceForm.getTrainingStartTimeHour(),
+								dailyAttendanceForm.getTrainingStartTimeMinutes()));
+			}
+			
+			if (dailyAttendanceForm.getTrainingEndTimeHour() != null
+					&& dailyAttendanceForm.getTrainingEndTimeMinutes() != null) {
+				dailyAttendanceForm
+					.setTrainingEndTime(String.format("%02d:%02d", 
+								dailyAttendanceForm.getTrainingEndTimeHour(),
+								dailyAttendanceForm.getTrainingEndTimeMinutes()));
+			}
+		}
+	}
 }

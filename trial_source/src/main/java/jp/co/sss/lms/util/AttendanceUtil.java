@@ -171,10 +171,13 @@ public class AttendanceUtil {
 	 * @return 出退勤時間(時間)
 	 */
 	public Integer getHour(String timeString) {
+		if (timeString.isEmpty() || timeString == null) {
+			return null;
+		}
 		Integer hour = Integer.parseInt(timeString.substring(0, 2));
 		return hour;
 	}
-	
+
 	/**
 	 * 時間(分)の切り出し
 	 * 
@@ -183,7 +186,10 @@ public class AttendanceUtil {
 	 * @return 出退勤時間(分)
 	 */
 	public Integer getMinute(String timeString) {
-		Integer minutes = Integer.parseInt(timeString.substring(3, 5));
+		if (timeString.isEmpty() || timeString == null) {
+			return null;
+		}
+		Integer minutes = Integer.parseInt(timeString.substring(3));
 		return minutes;
 	}
 
