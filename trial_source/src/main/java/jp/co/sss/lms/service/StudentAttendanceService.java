@@ -248,12 +248,12 @@ public class StudentAttendanceService {
 				dailyAttendanceForm
 						.setTrainingStartTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
 				dailyAttendanceForm
-						.setTrainingStartTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTime()));
+						.setTrainingStartTimeMinute(attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTime()));
 			
 				dailyAttendanceForm
 						.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTime()));
 				dailyAttendanceForm
-						.setTrainingEndTimeMinutes(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTime()));
+						.setTrainingEndTimeMinute(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTime()));
 			
 			if (attendanceManagementDto.getBlankTime() != null) {
 				dailyAttendanceForm.setBlankTime(attendanceManagementDto.getBlankTime());
@@ -365,19 +365,19 @@ public class StudentAttendanceService {
 	public void formatConversion(AttendanceForm attendanceForm) {
 		for (DailyAttendanceForm dailyAttendanceForm : attendanceForm.getAttendanceList()) {
 			if (dailyAttendanceForm.getTrainingStartTimeHour() != null
-					&& dailyAttendanceForm.getTrainingStartTimeMinutes() != null) {
+					&& dailyAttendanceForm.getTrainingStartTimeMinute() != null) {
 				dailyAttendanceForm
 					.setTrainingStartTime(String.format("%02d:%02d", 
 								dailyAttendanceForm.getTrainingStartTimeHour(),
-								dailyAttendanceForm.getTrainingStartTimeMinutes()));
+								dailyAttendanceForm.getTrainingStartTimeMinute()));
 			}
 			
 			if (dailyAttendanceForm.getTrainingEndTimeHour() != null
-					&& dailyAttendanceForm.getTrainingEndTimeMinutes() != null) {
+					&& dailyAttendanceForm.getTrainingEndTimeMinute() != null) {
 				dailyAttendanceForm
 					.setTrainingEndTime(String.format("%02d:%02d", 
 								dailyAttendanceForm.getTrainingEndTimeHour(),
-								dailyAttendanceForm.getTrainingEndTimeMinutes()));
+								dailyAttendanceForm.getTrainingEndTimeMinute()));
 			}
 		}
 	}
