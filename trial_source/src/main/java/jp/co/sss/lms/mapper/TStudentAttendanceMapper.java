@@ -67,6 +67,7 @@ public interface TStudentAttendanceMapper {
 
 	/**
 	 * 勤怠情報の未入力件数を検索
+	 * 
 	 * @author 西川颯一郎 -Task.25
 	 * @param lmsUserId
 	 * @param deleteFlg

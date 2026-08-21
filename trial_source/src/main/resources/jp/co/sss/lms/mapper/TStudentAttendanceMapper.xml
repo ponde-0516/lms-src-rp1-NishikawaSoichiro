@@ -86,7 +86,7 @@
 		WHERE student_attendance_id = #{studentAttendanceId}
 	</update>
 	
-	<!-- 西川颯一郎 Task.25 -->
+	<!--未入力チェック 西川颯一郎 Task.25 -->
 	<select id="notEnterCount" resultType="java.lang.Integer">
 		SELECT
 			COUNT(*)

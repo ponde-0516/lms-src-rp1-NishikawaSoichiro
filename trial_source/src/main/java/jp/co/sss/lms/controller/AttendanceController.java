@@ -130,6 +130,7 @@ public class AttendanceController {
 	/**
 	 * 勤怠情報直接変更画面 『更新』ボタン押下
 	 * 
+	 * @author 西川颯一郎-Task26
 	 * @param attendanceForm
 	 * @param model
 	 * @param result
@@ -140,6 +141,7 @@ public class AttendanceController {
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
 		
+		//hh:mm形式へ変換 西川颯一郎-Task26
 		studentAttendanceService.formatConversion(attendanceForm);
 		// 更新
 		String message = studentAttendanceService.update(attendanceForm);

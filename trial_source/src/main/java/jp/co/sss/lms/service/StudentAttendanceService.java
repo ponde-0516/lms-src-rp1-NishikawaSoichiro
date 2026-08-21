@@ -220,8 +220,8 @@ public class StudentAttendanceService {
 		attendanceForm.setUserName(loginUserDto.getUserName());
 		attendanceForm.setLeaveFlg(loginUserDto.getLeaveFlg());
 		attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
-		
-		//Task26にて追加
+
+		//時間･分マップをセット 西川颯一郎-Task26
 		attendanceForm.setHourTimes(attendanceUtil.getHourMap());
 		attendanceForm.setMinutesTimes(attendanceUtil.getMinuteMap());
 
@@ -243,18 +243,19 @@ public class StudentAttendanceService {
 			dailyAttendanceForm
 					.setTrainingStartTime(attendanceManagementDto.getTrainingStartTime());
 			dailyAttendanceForm.setTrainingEndTime(attendanceManagementDto.getTrainingEndTime());
-			
-			//Task26にて追加
-				dailyAttendanceForm
-						.setTrainingStartTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
-				dailyAttendanceForm
-						.setTrainingStartTimeMinute(attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTime()));
-			
-				dailyAttendanceForm
-						.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTime()));
-				dailyAttendanceForm
-						.setTrainingEndTimeMinute(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTime()));
-			
+
+			//出退勤時間セット 西川颯一郎-Task26
+			dailyAttendanceForm
+					.setTrainingStartTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
+			dailyAttendanceForm
+					.setTrainingStartTimeMinute(
+							attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTime()));
+
+			dailyAttendanceForm
+					.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTime()));
+			dailyAttendanceForm
+					.setTrainingEndTimeMinute(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTime()));
+
 			if (attendanceManagementDto.getBlankTime() != null) {
 				dailyAttendanceForm.setBlankTime(attendanceManagementDto.getBlankTime());
 				dailyAttendanceForm.setBlankTimeValue(String.valueOf(
@@ -350,7 +351,14 @@ public class StudentAttendanceService {
 		// 完了メッセージ
 		return messageUtil.getMessage(Constants.PROP_KEY_ATTENDANCE_UPDATE_NOTICE);
 	}
-
+	
+	/**
+	 * 過去日の未入力チェック
+	 * 
+	 * @author 西川颯一郎-Task25
+	 * @return [未入力日が0より大きい場合]:true , [そうでない場合]false
+	 * @throws ParseException
+	 */
 	public Boolean notEnterCheck() throws ParseException {
 		Date today = new Date();
 		Integer notEnterCount = tStudentAttendanceMapper.notEnterCount(loginUserDto.getLmsUserId(),
@@ -362,6 +370,12 @@ public class StudentAttendanceService {
 		}
 	}
 	
+	/**
+	 * 入力された出退勤の{時間}{分}をhh:mm形式に変換し、AttendanceFormにセット
+	 * 
+	 * @author 西川颯一郎-Task26
+	 * @param attendanceForm
+	 */
 	public void formatConversion(AttendanceForm attendanceForm) {
 		for (DailyAttendanceForm dailyAttendanceForm : attendanceForm.getAttendanceList()) {
 			if (dailyAttendanceForm.getTrainingStartTimeHour() != null
