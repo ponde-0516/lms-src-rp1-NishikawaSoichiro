@@ -1,6 +1,7 @@
 package jp.co.sss.lms.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -360,14 +361,12 @@ public class StudentAttendanceService {
 	 * @throws ParseException
 	 */
 	public Boolean notEnterCheck() throws ParseException {
-		Date today = new Date();
+		SimpleDateFormat newFormat = new SimpleDateFormat("yyyy/MM/dd");
+		String todayParse= newFormat.format(new Date());
+		Date today = newFormat.parse(todayParse);
 		Integer notEnterCount = tStudentAttendanceMapper.notEnterCount(loginUserDto.getLmsUserId(),
 				Constants.DB_FLG_FALSE, today);
-		if (notEnterCount > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return notEnterCount>0;
 	}
 	
 	/**
